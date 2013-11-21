@@ -154,6 +154,14 @@ describe('Injector', function () {
       expect(serviceRv).toBe(injector);
     });
 
+    it('should invoke with instance of service', function () {
+      expect(injector.invoke(test) instanceof Foo).toBe(true);
+
+      function test(foo) {
+        return foo;
+      }
+    });
+
     function Foo() {
       this.foo = 'bar';
     }
