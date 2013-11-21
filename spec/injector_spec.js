@@ -206,6 +206,22 @@ describe('Injector', function () {
     }
   });
 
+  describe('given a value', function () {
+    var injector, resolvedFoo;
+
+    beforeEach(function () {
+      injector = new Injector();
+
+      injector.value('foo', 'bar');
+
+      resolvedFoo = injector.resolve('foo');
+    });
+
+    it('should resolve correct value', function () {
+      expect(resolvedFoo).toBe('bar');
+    });
+  });
+
   describe('creating a child injector', function () {
     var parent, child;
 
