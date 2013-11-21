@@ -135,5 +135,29 @@ describe('Injector', function () {
     });
   });
 
+  describe('given a service', function () {
+    var injector, serviceRv, myFoo;
+
+    beforeEach(function () {
+      injector = new Injector();
+
+      serviceRv = injector.service('foo', Foo);
+
+      myFoo = injector.resolve('foo');
+    });
+
+    it('should be instanceof Foo', function () {
+      expect(myFoo instanceof Foo).toBe(true);
+    });
+
+    it('should return self from Injector#service', function () {
+      expect(serviceRv).toBe(injector);
+    });
+
+    function Foo() {
+      this.foo = 'bar';
+    }
+  });
+
 });
 
