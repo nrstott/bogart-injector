@@ -176,5 +176,31 @@ describe('Injector', function () {
     }
   });
 
+  describe('given a service with dependencies', function () {
+    var injector, myFoo, myBar;
+
+    beforeEach(function () {
+      injector = new Injector();
+
+      injector
+        .service('foo', Foo)
+        .service('bar', Bar);
+
+      myFoo = injector.resolve('foo');
+    });
+
+    it('should be instanceof Foo', function () {
+      expect(myFoo instanceof Foo).toBe(true);
+    });
+
+    function Foo(bar) {
+      this.foo = bar;
+    }
+
+    function Bar() {
+      this.bar = 'baz';
+    }
+  });
+
 });
 
