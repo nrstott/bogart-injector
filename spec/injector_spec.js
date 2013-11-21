@@ -112,16 +112,15 @@ describe('Injector', function () {
 
   describe('given a factory', function () {
 
-    var injector, factoryRv, myFoo;
+    var injector, factoryFn, factoryRv, myFoo;
 
     beforeEach(function () {
       injector = new Injector();
 
-      factoryRv = injector.factory('foo', function () {
-        return {
-          foo: 'bar'
-        };
-      });
+      factoryFn = jasmine.createSpy('factory function');
+      factoryFn.andReturn({ foo: 'bar' });
+
+      factoryRv = injector.factory('foo', factoryFn);
 
       myFoo = injector.resolve('foo');
     });
@@ -132,6 +131,16 @@ describe('Injector', function () {
 
     it('should return injector', function () {
       expect(factoryRv).toBe(injector);
+    });
+
+    it('should invoke factory function', function () {
+      injector.invoke(test);
+
+      expect(factoryFn).toHaveBeenCalled();
+
+      function test(foo) {
+        return foo;
+      }
     });
   });
 
