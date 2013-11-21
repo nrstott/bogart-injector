@@ -193,6 +193,10 @@ describe('Injector', function () {
       expect(myFoo instanceof Foo).toBe(true);
     });
 
+    it('should have dependency correct value for foo', function () {
+      expect(myFoo.foo).toEqual({ bar: 'baz' });
+    });
+
     function Foo(bar) {
       this.foo = bar;
     }
