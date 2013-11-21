@@ -1,0 +1,6 @@
+{
+  "name": "bogart-injector",
+  "dependencies": {
+    "collections": "~0.2.2"
+  }
+}
