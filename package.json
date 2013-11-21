@@ -1,6 +1,16 @@
 {
   "name": "bogart-injector",
+  "author": "Nathan Stott <nrstott@gmail.com>",
+  "keywords": [
+    "bogart",
+    "dependency",
+    "injection",
+    "injector"
+  ],
   "dependencies": {
     "collections": "~0.2.2"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.11.0"
   }
 }
