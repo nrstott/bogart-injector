@@ -206,5 +206,30 @@ describe('Injector', function () {
     }
   });
 
+  describe('creating a child injector', function () {
+    var parent, child;
+
+    beforeEach(function () {
+      parent = new Injector();
+      child = parent.createChild();
+    });
+
+    it('should be instanceof Injector', function () {
+      expect(child instanceof Injector).toBe(true);
+    });
+
+    describe('given dependency in parent', function () {
+      beforeEach(function () {
+        parent.factory('foo', function () {
+          return 'foo';
+        });
+      });
+
+      it('should resolve from child', function () {
+        expect(child.resolve('foo')).toBe('foo');
+      });
+    });
+  });
+
 });
 
