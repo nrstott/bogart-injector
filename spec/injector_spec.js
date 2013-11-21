@@ -110,5 +110,30 @@ describe('Injector', function () {
     });
   });
 
+  describe('given a factory', function () {
+
+    var injector, factoryRv, myFoo;
+
+    beforeEach(function () {
+      injector = new Injector();
+
+      factoryRv = injector.factory('foo', function () {
+        return {
+          foo: 'bar'
+        };
+      });
+
+      myFoo = injector.resolve('foo');
+    });
+
+    it('should be defined', function () {
+      expect(myFoo).not.toBe(undefined);
+    });
+
+    it('should return injector', function () {
+      expect(factoryRv).toBe(injector);
+    });
+  });
+
 });
 
