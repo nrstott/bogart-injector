@@ -248,10 +248,10 @@ describe('Injector', function () {
   });
 
   describe('invoke array', function () {
-    var dependencyNames, callback, fooValue, barValue, result, callbackReturn;
+    var dependencyNames, callback, fooValue, barValue, result, callbackReturn, invokeArray;
 
     beforeEach(function () {
-      dependencyNames = [ 'foo', 'bar' ]
+      dependencyNames = [ 'foo', 'bar' ];
 
       callbackReturn = '__callback return value__';
 
@@ -266,11 +266,16 @@ describe('Injector', function () {
       injector.value('foo', fooValue);
       injector.value('bar', barValue);
 
-      result = injector.invoke(dependencyNames.concat([ callback ]));
+      invokeArray = dependencyNames.concat([ callback ])
+      result = injector.invoke(invokeArray);
     });
 
     it('should have correct result', function () {
       expect(result).toBe(callbackReturn);
+    });
+
+    it('should not destroy array', function () {
+      expect(invokeArray.length).toBe(3);
     });
   });
 });
