@@ -247,5 +247,31 @@ describe('Injector', function () {
     });
   });
 
+  describe('invoke array', function () {
+    var dependencyNames, callback, fooValue, barValue, result, callbackReturn;
+
+    beforeEach(function () {
+      dependencyNames = [ 'foo', 'bar' ]
+
+      callbackReturn = '__callback return value__';
+
+      callback = function () {
+        return callbackReturn;
+      };
+
+      fooValue = 'abc123';
+      barValue = 'xyz321';
+
+      var injector = new Injector();
+      injector.value('foo', fooValue);
+      injector.value('bar', barValue);
+
+      result = injector.invoke(dependencyNames.concat([ callback ]));
+    });
+
+    it('should have correct result', function () {
+      expect(result).toBe(callbackReturn);
+    });
+  });
 });
 
