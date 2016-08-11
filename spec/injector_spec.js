@@ -17,6 +17,18 @@ describe('Injector', function () {
       });
     });
 
+    describe('given lambda with no arguments', function () {
+      var dependencies;
+
+      beforeEach(function () {
+        dependencies = Injector.annotate(() => { return true; });
+      });
+
+      it('should have length of 0', function () {
+        expect(dependencies.length).toBe(0);
+      });
+    });
+
     describe('given function with one argument', function () {
       var dependencies;
 
@@ -29,6 +41,18 @@ describe('Injector', function () {
       })
     });
 
+    describe('given lambda with one argument', function () {
+      var dependencies;
+
+      beforeEach(function () {
+        dependencies = Injector.annotate((foo) => { return foo(); })
+      });
+
+      it('should have length 1', function () {
+        expect(dependencies.length).toBe(1);
+      });
+    });
+
     describe('given function with arguments', function () {
       var dependencies;
 
@@ -38,6 +62,38 @@ describe('Injector', function () {
 
       it('should have length of 2', function () {
         expect(dependencies.length).toBe(2);
+      });
+    });
+
+    describe('given lambda with arguments', function () {
+      var dependencies;
+
+      beforeEach(function () {
+        dependencies = Injector.annotate((foo, bar) => { return foo(bar()); });
+      });
+
+      it('should have length of 2', function () {
+        expect(dependencies.length).toBe(2);
+      });
+    });
+
+    describe('given method', function () {
+      class Foo {
+        bar(baz) {
+          return 'baz';
+        }
+      }
+
+      beforeEach(function () {
+        dependencies = Injector.annotate(new Foo().bar);
+      })
+
+      it('should have length of 1', function () {
+        expect(dependencies.length).toBe(1);
+      });
+
+      it('should have dependency named `baz`', function () {
+        expect(dependencies[0]).toBe('baz');
       });
     });
   });
