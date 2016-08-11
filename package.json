@@ -1,6 +1,6 @@
 {
   "name": "bogart-injector",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "author": "Nathan Stott <nrstott@gmail.com>",
   "keywords": [
     "bogart",
@@ -14,5 +14,12 @@
   },
   "devDependencies": {
     "jasmine-node": "~1.11.0"
+  },
+  "engines": [
+    { "node": ">=4.4.5" }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nrstott/bogart-injector"
   }
 }
