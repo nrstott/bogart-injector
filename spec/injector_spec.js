@@ -59,7 +59,7 @@ describe('Injector', function () {
       it('should have correct dependency', function () {
         expect(dependencies[0]).toBe('foo');
       });
-      
+
       it('should have correct dependency', function () {
         expect(dependencies[0]).toBe('foo');
       });
@@ -107,13 +107,13 @@ describe('Injector', function () {
 
     describe('given method', function () {
       class Foo {
-        bar(baz) {
+        new(baz) {
           return 'baz';
         }
       }
 
       beforeEach(function () {
-        dependencies = Injector.annotate(new Foo().bar);
+        dependencies = Injector.annotate(new Foo().new);
       })
 
       it('should have length of 1', function () {
