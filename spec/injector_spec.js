@@ -38,18 +38,30 @@ describe('Injector', function () {
 
       it('should have length of 1', function () {
         expect(dependencies.length).toBe(1);
-      })
+      });
+
+      it('should have correct dependency', function () {
+        expect(dependencies[0]).toBe('foo');
+      });
     });
 
     describe('given lambda with one argument', function () {
       var dependencies;
 
       beforeEach(function () {
-        dependencies = Injector.annotate((foo) => { return foo(); })
+        dependencies = Injector.annotate(foo => { return foo(); })
       });
 
       it('should have length 1', function () {
         expect(dependencies.length).toBe(1);
+      });
+
+      it('should have correct dependency', function () {
+        expect(dependencies[0]).toBe('foo');
+      });
+      
+      it('should have correct dependency', function () {
+        expect(dependencies[0]).toBe('foo');
       });
     });
 
@@ -63,6 +75,14 @@ describe('Injector', function () {
       it('should have length of 2', function () {
         expect(dependencies.length).toBe(2);
       });
+
+      it('should have foo dependency', function () {
+        expect(dependencies[0]).toBe('foo');
+      });
+
+      it('should have bar dependency', function () {
+        expect(dependencies[1]).toBe('bar');
+      });
     });
 
     describe('given lambda with arguments', function () {
@@ -74,6 +94,14 @@ describe('Injector', function () {
 
       it('should have length of 2', function () {
         expect(dependencies.length).toBe(2);
+      });
+
+      it('should have foo dependency', function () {
+        expect(dependencies[0]).toBe('foo');
+      });
+
+      it('should have bar dependency', function () {
+        expect(dependencies[1]).toBe('bar');
       });
     });
 
